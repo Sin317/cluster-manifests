@@ -26,7 +26,7 @@ spec:
        - cidr: 9.37.195.0/24
     nodes:
        - hostName: "master-9-ocp48k5"
-         bmcAddress: "idrac-virtualmedia+https://9.37.131.102/redfish/v1/Systems/System.Embedded.1"
+         bmcAddress: "redfish-virtualmedia+https://9.37.131.102/redfish/v1/Systems/1" 
          bmcCredentialsName:
            name: "master-9-ocp48k5-master-9-ocp48k5-bmh-secret"
          bootMACAddress: "3C:EC:EF:5E:3C:4C"
