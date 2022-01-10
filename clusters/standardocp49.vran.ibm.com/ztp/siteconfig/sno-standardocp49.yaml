@@ -12,7 +12,7 @@ spec:
   clusters:
   - clusterName: "standardocp49"
     clusterType: "standard"
-    clusterProfile: "du"
+    clusterProfile: "cu-du"
     numMasters: 3
     numWorkers: 2
     clusterLabels:
