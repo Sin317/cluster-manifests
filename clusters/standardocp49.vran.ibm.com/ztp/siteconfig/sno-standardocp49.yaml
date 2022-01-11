@@ -27,6 +27,7 @@ spec:
        - 172.30.0.0/16
     apiVIP: 9.37.195.14
     ingressVIP: 9.37.195.13
+    networkType: "OpenShiftSDN"
     nodes:
        - hostName: "tristate-39-ocp49"
          bmcAddress: "idrac-virtualmedia+https://9.37.131.39/redfish/v1/Systems/System.Embedded.1" 
