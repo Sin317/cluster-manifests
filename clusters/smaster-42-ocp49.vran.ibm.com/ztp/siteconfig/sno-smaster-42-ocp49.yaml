@@ -1,0 +1,51 @@
+apiVersion: ran.openshift.io/v1
+kind: SiteConfig
+metadata:
+  name: "smaster-42-ocp49"
+  namespace: "smaster-42-ocp49"
+spec:
+  baseDomain: "vran.ibm.com"
+  pullSecretRef:
+    name: "assisted-deployment-pull-secret"
+  clusterImageSetNameRef: "vran-ocp-v4.9.9-master-4-ocp49-1" 
+  sshPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDcxiYc4jgW4HOhwkZIMS8MgSsrle5bnbqXIMjGvV090MsF/UtiEfuD/7mrnf8D1mG4xzidrUhzTj8Zp2LVOXaC+pUtHsf91WUFsvBpajBPgXqQmnKu06DLay2ciw8z+yjeN36ynbxpdb633wOF2TyeGTmeLhpnAaSbCdsCxBBgLHVc5THVQYPJpOxhr8HKWvrDBhHXhT3RllZd3mHb3CmffVdY5L7OyShRRfDnl/Z3vojf2XQy6SsCmHSihFjprQk+ZSILH6UzQLvsQvbUONlImBkWrwE9iZHKhaneajT5zRMdNyE8r1/7iZ0JDWEpLm08lzQAf/U1UWoufCqjYRoGfTe3KI/flW3nc3EbR1b5MtMsZ2HCPHfwRjkSP2pgcFVAyDru6ANTBPvxsdfkvspM1+bgsZuk/GTUzZsKPi7P2uqONoV3OgcauzfI4nrM1XeGNOCuUuvCirrTq9wfdKuQePu8nP4wYqcrw08UE+nGxUEX4WlCL6nmzu7HNGQlNU8= root@provisioner1.fyre.ibm.com"
+  clusters:
+  - clusterName: "smaster-42-ocp49"
+    clusterType: "sno"
+    clusterProfile: "du"
+    numMasters: 1
+    clusterLabels:
+      common: true
+      sites : "smaster-42-ocp49"
+    clusterNetwork:
+       - cidr: 10.128.0.0/14
+         hostPrefix: 23
+    serviceNetwork:
+       - 172.30.0.0/16
+    machineNetwork:
+       - cidr: 9.37.195.0/24
+    nodes:
+       - hostName: "smaster-42-ocp49"
+         bmcAddress: "idrac-virtualmedia+https://9.37.131.42/redfish/v1/Systems/System.Embedded.1" 
+         bmcCredentialsName:
+           name: "smaster-42-ocp49-smaster-42-ocp49-bmh-secret"
+         bootMACAddress: "F0:D4:E2:E8:E9:2C"
+         bootMode: "UEFI"
+         rootDeviceHints:
+           deviceName: "/dev/sdb"
+         cpuset: "0-1,38-39"
+         nodeNetwork:
+            interfaces:
+            - name: eno1
+              macAddress: "F0:D4:E2:E8:E9:2C"
+            config:
+               interfaces:
+               - name: eno1
+                 type: ethernet
+                 state: up
+                 macAddress: "F0:D4:E2:E8:E9:2C"
+                 ipv4:
+                   enabled: true
+                   dhcp: true
+                 ipv6:
+                   enabled: false
