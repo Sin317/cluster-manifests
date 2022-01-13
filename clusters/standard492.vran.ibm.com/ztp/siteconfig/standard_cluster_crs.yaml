@@ -34,7 +34,6 @@ spec:
   #holdInstallation: true
   provisionRequirements:
     controlPlaneAgents: 3
-    #workerAgents: 0
   imageSetRef:
     name: "vran-ocp-v4.9.9-master-4-ocp49-1"
   networking:
