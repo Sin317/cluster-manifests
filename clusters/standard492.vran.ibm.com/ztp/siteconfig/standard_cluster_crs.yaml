@@ -1,0 +1,144 @@
+---
+apiVersion: hive.openshift.io/v1
+kind: ClusterDeployment
+metadata:
+  name: standard492
+  namespace: standard492
+spec:
+  baseDomain: vran.ibm.com
+  clusterInstallRef:
+    group: extensions.hive.openshift.io
+    kind: AgentClusterInstall
+    name: standard492
+    version: v1beta1
+  clusterName: standard492
+  platform:
+    agentBareMetal:
+      agentSelector:
+        matchLabels:
+          cluster-name: standard492
+  pullSecretRef:
+    name: assisted-deployment-pull-secret
+
+---
+apiVersion: extensions.hive.openshift.io/v1beta1
+kind: AgentClusterInstall
+metadata:
+  name: standard492
+  namespace: standard492
+spec:
+  apiVIP: 9.37.195.13
+  ingressVIP: 9.37.195.14
+  clusterDeploymentRef:
+    name: standard492
+  #holdInstallation: true
+  provisionRequirements:
+    controlPlaneAgents: 3
+  imageSetRef:
+    name: "vran-ocp-v4.9.9-master-4-ocp49-1"
+  networking:
+    clusterNetwork:
+    - cidr: 10.128.0.0/14
+      hostPrefix: 23
+    serviceNetwork:
+    - 172.30.0.0/16
+  sshPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDcxiYc4jgW4HOhwkZIMS8MgSsrle5bnbqXIMjGvV090MsF/UtiEfuD/7mrnf8D1mG4xzidrUhzTj8Zp2LVOXaC+pUtHsf91WUFsvBpajBPgXqQmnKu06DLay2ciw8z+yjeN36ynbxpdb633wOF2TyeGTmeLhpnAaSbCdsCxBBgLHVc5THVQYPJpOxhr8HKWvrDBhHXhT3RllZd3mHb3CmffVdY5L7OyShRRfDnl/Z3vojf2XQy6SsCmHSihFjprQk+ZSILH6UzQLvsQvbUONlImBkWrwE9iZHKhaneajT5zRMdNyE8r1/7iZ0JDWEpLm08lzQAf/U1UWoufCqjYRoGfTe3KI/flW3nc3EbR1b5MtMsZ2HCPHfwRjkSP2pgcFVAyDru6ANTBPvxsdfkvspM1+bgsZuk/GTUzZsKPi7P2uqONoV3OgcauzfI4nrM1XeGNOCuUuvCirrTq9wfdKuQePu8nP4wYqcrw08UE+nGxUEX4WlCL6nmzu7HNGQlNU8= root@provisioner1.fyre.ibm.com"
+
+---
+apiVersion: agent.open-cluster-management.io/v1
+kind: KlusterletAddonConfig
+metadata:
+  name: standard492
+  namespace: standard492
+spec:
+  clusterName: standard492
+  clusterNamespace: standard492
+  clusterLabels:
+    cloud: auto-detect
+    vendor: auto-detect
+  applicationManager:
+    enabled: true
+  policyController:
+    enabled: true
+  searchCollector:
+    enabled: true
+  certPolicyController:
+    enabled: true
+  iamPolicyController:
+    enabled: true
+
+---
+apiVersion: agent-install.openshift.io/v1beta1
+kind: InfraEnv
+metadata:
+  name: standard492
+  namespace: standard492
+  
+spec:
+  clusterRef:
+    name: standard492
+    namespace: standard492
+  # agentLabelSelector:
+  #   matchLabels:
+  #     cluster-name: standard492
+  pullSecretRef:
+    name: assisted-deployment-pull-secret
+  sshAuthorizedKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDcxiYc4jgW4HOhwkZIMS8MgSsrle5bnbqXIMjGvV090MsF/UtiEfuD/7mrnf8D1mG4xzidrUhzTj8Zp2LVOXaC+pUtHsf91WUFsvBpajBPgXqQmnKu06DLay2ciw8z+yjeN36ynbxpdb633wOF2TyeGTmeLhpnAaSbCdsCxBBgLHVc5THVQYPJpOxhr8HKWvrDBhHXhT3RllZd3mHb3CmffVdY5L7OyShRRfDnl/Z3vojf2XQy6SsCmHSihFjprQk+ZSILH6UzQLvsQvbUONlImBkWrwE9iZHKhaneajT5zRMdNyE8r1/7iZ0JDWEpLm08lzQAf/U1UWoufCqjYRoGfTe3KI/flW3nc3EbR1b5MtMsZ2HCPHfwRjkSP2pgcFVAyDru6ANTBPvxsdfkvspM1+bgsZuk/GTUzZsKPi7P2uqONoV3OgcauzfI4nrM1XeGNOCuUuvCirrTq9wfdKuQePu8nP4wYqcrw08UE+nGxUEX4WlCL6nmzu7HNGQlNU8= root@provisioner1.fyre.ibm.com"
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: "tristate-39-3"
+  namespace: standard492
+  annotations:
+    inspect.metal3.io: disabled
+  labels:
+    infraenvs.agent-install.openshift.io: "standard492"
+spec:
+  bootMode: "UEFI"
+  bmc:
+    address: "idrac-virtualmedia+https://9.37.131.39/redfish/v1/Systems/System.Embedded.1" 
+    disableCertificateVerification: true
+    credentialsName: standard492-tristate-39-3-bmh-secret
+  bootMACAddress: F0:D4:E2:E8:BE:94
+  automatedCleaningMode: disabled
+  online: true
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: "tristate-69-2"
+  namespace: standard492
+  annotations:
+    inspect.metal3.io: disabled
+  labels:
+    infraenvs.agent-install.openshift.io: "standard492"
+spec:
+  bootMode: "UEFI"
+  bmc:
+    address: "idrac-virtualmedia+https://9.37.131.69/redfish/v1/Systems/System.Embedded.1" 
+    disableCertificateVerification: true
+    credentialsName: standard492-tristate-69-2-bmh-secret
+  bootMACAddress: 78:AC:44:32:77:00
+  automatedCleaningMode: disabled
+  online: true
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: "tristate-71-1"
+  namespace: standard492
+  annotations:
+    inspect.metal3.io: disabled
+  labels:
+    infraenvs.agent-install.openshift.io: "standard492"
+spec:
+  bootMode: "UEFI"
+  bmc:
+    address: "idrac-virtualmedia+https://9.37.131.71/redfish/v1/Systems/System.Embedded.1" 
+    disableCertificateVerification: true
+    credentialsName: standard492-tristate-71-1-bmh-secret
+  bootMACAddress: 78:AC:44:32:8A:70
+  automatedCleaningMode: disabled
+  online: true
+---
