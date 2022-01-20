@@ -34,6 +34,7 @@ spec:
   #holdInstallation: true
   provisionRequirements:
     controlPlaneAgents: 3
+    workerAgents: 2
   imageSetRef:
     name: "vran-ocp-v4.9.9-master-4-ocp49-1"
   networking:
@@ -88,10 +89,51 @@ spec:
 apiVersion: metal3.io/v1alpha1
 kind: BareMetalHost
 metadata:
+  name: "master-44-01"
+  namespace: standard492
+  annotations:
+    inspect.metal3.io: disabled
+    bmac.agent-install.openshift.io/role: master
+  labels:
+    infraenvs.agent-install.openshift.io: "standard492"
+spec:
+  bootMode: "UEFI"
+  bmc:
+    address: "idrac-virtualmedia+https://9.37.131.44/redfish/v1/Systems/System.Embedded.1" 
+    disableCertificateVerification: true
+    credentialsName: standard492-master-44-01-bmh-secret
+  bootMACAddress: 78:AC:44:22:9B:74
+  automatedCleaningMode: disabled
+  online: true
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: "master-45-01"
+  namespace: standard492
+  annotations:
+    inspect.metal3.io: disabled
+    bmac.agent-install.openshift.io/role: master
+  labels:
+    infraenvs.agent-install.openshift.io: "standard492"
+spec:
+  bootMode: "UEFI"
+  bmc:
+    address: "idrac-virtualmedia+https://9.37.131.45/redfish/v1/Systems/System.Embedded.1" 
+    disableCertificateVerification: true
+    credentialsName: standard492-master-45-01-bmh-secret
+  bootMACAddress: 78:AC:44:22:99:10
+  automatedCleaningMode: disabled
+  online: true
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
   name: "tristate-39-3"
   namespace: standard492
   annotations:
     inspect.metal3.io: disabled
+    bmac.agent-install.openshift.io/role: master
   labels:
     infraenvs.agent-install.openshift.io: "standard492"
 spec:
@@ -111,6 +153,7 @@ metadata:
   namespace: standard492
   annotations:
     inspect.metal3.io: disabled
+    bmac.agent-install.openshift.io/role: worker
   labels:
     infraenvs.agent-install.openshift.io: "standard492"
 spec:
@@ -130,6 +173,7 @@ metadata:
   namespace: standard492
   annotations:
     inspect.metal3.io: disabled
+    bmac.agent-install.openshift.io/role: worker
   labels:
     infraenvs.agent-install.openshift.io: "standard492"
 spec:

@@ -26,6 +26,54 @@ spec:
     apiVIP: 9.37.195.13
     ingressVIP: 9.37.195.14
     nodes:
+       - hostName: "master-44-01"
+         bmcAddress: "idrac-virtualmedia+https://9.37.131.44/redfish/v1/Systems/System.Embedded.1" 
+         bmcCredentialsName:
+           name: "standard492-master-44-01-bmh-secret"
+         bootMACAddress: "78:AC:44:22:9B:74"
+         bootMode: "UEFI"
+         rootDeviceHints:
+           deviceName: "/dev/sdb"
+         cpuset: "0-1,38-39"
+         nodeNetwork:
+            interfaces:
+            - name: eno1
+              macAddress: "78:AC:44:22:9B:74"
+            config:
+               interfaces:
+               - name: eno1
+                 type: ethernet
+                 state: up
+                 macAddress: "78:AC:44:22:9B:74"
+                 ipv4:
+                   enabled: true
+                   dhcp: true
+                 ipv6:
+                   enabled: false
+       - hostName: "master-45-01"
+         bmcAddress: "idrac-virtualmedia+https://9.37.131.45/redfish/v1/Systems/System.Embedded.1" 
+         bmcCredentialsName:
+           name: "standard492-master-45-01-bmh-secret"
+         bootMACAddress: "78:AC:44:22:99:10"
+         bootMode: "UEFI"
+         rootDeviceHints:
+           deviceName: "/dev/sdb"
+         cpuset: "0-1,38-39"
+         nodeNetwork:
+            interfaces:
+            - name: eno1
+              macAddress: "78:AC:44:22:99:10"
+            config:
+               interfaces:
+               - name: eno1
+                 type: ethernet
+                 state: up
+                 macAddress: "78:AC:44:22:99:10"
+                 ipv4:
+                   enabled: true
+                   dhcp: true
+                 ipv6:
+                   enabled: false
        - hostName: "tristate-39-3"
          bmcAddress: "idrac-virtualmedia+https://9.37.131.39/redfish/v1/Systems/System.Embedded.1" 
          bmcCredentialsName:
@@ -45,54 +93,6 @@ spec:
                  type: ethernet
                  state: up
                  macAddress: "F0:D4:E2:E8:BE:94"
-                 ipv4:
-                   enabled: true
-                   dhcp: true
-                 ipv6:
-                   enabled: false
-       - hostName: "tristate-69-2"
-         bmcAddress: "idrac-virtualmedia+https://9.37.131.69/redfish/v1/Systems/System.Embedded.1" 
-         bmcCredentialsName:
-           name: "standard492-tristate-69-2-bmh-secret"
-         bootMACAddress: "78:AC:44:32:77:00"
-         bootMode: "UEFI"
-         rootDeviceHints:
-           deviceName: "/dev/sdb"
-         cpuset: "0-1,38-39"
-         nodeNetwork:
-            interfaces:
-            - name: eno1
-              macAddress: "78:AC:44:32:77:00"
-            config:
-               interfaces:
-               - name: eno1
-                 type: ethernet
-                 state: up
-                 macAddress: "78:AC:44:32:77:00"
-                 ipv4:
-                   enabled: true
-                   dhcp: true
-                 ipv6:
-                   enabled: false
-       - hostName: "tristate-71-1"
-         bmcAddress: "idrac-virtualmedia+https://9.37.131.71/redfish/v1/Systems/System.Embedded.1" 
-         bmcCredentialsName:
-           name: "standard492-tristate-71-1-bmh-secret"
-         bootMACAddress: "78:AC:44:32:8A:70"
-         bootMode: "UEFI"
-         rootDeviceHints:
-           deviceName: "/dev/sdb"
-         cpuset: "0-1,38-39"
-         nodeNetwork:
-            interfaces:
-            - name: eno1
-              macAddress: "78:AC:44:32:8A:70"
-            config:
-               interfaces:
-               - name: eno1
-                 type: ethernet
-                 state: up
-                 macAddress: "78:AC:44:32:8A:70"
                  ipv4:
                    enabled: true
                    dhcp: true
