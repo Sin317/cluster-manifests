@@ -8,7 +8,7 @@ spec:
   pullSecretRef:
     name: "assisted-deployment-pull-secret"
   clusterImageSetNameRef: "vran-ocp-v4.9.9-master-sm-101-feb7" 
-  sshPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC4eoBz+soiVgRH/BP+bwq8liRa3fpSRBj/8YUYcO7+GWLEzKXITZtJ7n1vbfFMK0ZmyxPTWjo+cS3OkL4YaYEge4Ux5PB9pzjAx4mrZR7gpkiZAK1j677KPDpCyx70kUXjR2b10FoYxAe7SehzI1FFlJD79lpeGd8kaZBsIeHwzF2PNEDtF0WfcpsAAyzOaM0sGchmO529PDato/s50FkdIJ0AT+Xfo9unGnSnTdfVd2HIJiqkw2hjt8OPcf3BdDjVdGwrPro/5Q1T9EC0daEkvUaMWuiK5ylh5jD42Q2xtsNgmm7hS7RId96PFIVUMZ/1bZzcXvTKgIXqadRukdxx"
+  sshPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDK08oPCVV6itJ2PIQAByxoyllPsbYBxS+NRbNXHsY/6HfgYlBohOs52/UEMG5J5vqnFoJqJiuztu8cPxEimQNJ76slty098DAWhMCffV9xePYZtxuT/pn26LQg9tSZDVH0QDoksDYkgvo8RQ6pTpPHwya587Ywu1drQcR2Dku35gGDKu11JecCL+e83hgImB+3FdeIcWoGbn1deUU53SRvV9IPpuuWyogSIVb2ouCoD362ozohW/vTnrqnxW95DkzTy4oAgfpbBx8Do7WxJmY+7kx/FV/jTSPwfDS951yGPBrlMy3mI2vMMPSWbFJ8FJL5W3NsqvhX3qFLuoquns/b"
   clusters:
   - clusterName: "sm-101-feb14"
     clusterType: "sno"
