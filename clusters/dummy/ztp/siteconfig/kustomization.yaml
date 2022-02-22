@@ -4,4 +4,4 @@ kind: Kustomization
 resources:
     - post-sync.yaml
     - pre-sync.yaml
-    #- sno-dummy.yaml
+    - sno-dummy.yaml
