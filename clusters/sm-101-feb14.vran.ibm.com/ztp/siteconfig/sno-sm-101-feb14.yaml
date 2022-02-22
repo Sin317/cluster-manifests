@@ -8,7 +8,7 @@ spec:
   pullSecretRef:
     name: "assisted-deployment-pull-secret"
   clusterImageSetNameRef: "vran-ocp-v4.9.9-master-sm-101-feb7" 
-  sshPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDOwlr3uhzrmPPi/oS3ix5Rs+3TCkm83GljR5Ngn5IP1nC80gdJRszGsljECxRrPyKCN+H8YnU1zVC5looAkt887FOQyPRFOOFODrUTvlxvO3MfAHmD4d2m7sZ31YPmn7xrR3Pth3iLV23W6iCdbN7ImqopKAtpTyn1GDSucsSblKExL5B9BPCbzb4xpZXe0J5fkIyd553epjt5G/0jitGRjlA84gBHpOPlAycQW3q5z8wkeMBCZtw0cJIIJjARfzIjJJPEUUD8PZKi07CG4SRli31y5OKV8WxWwq+lL7DUMINsOCxMYyDKKDcg696b3603iQ61WpyGHMmP3yxhsVfd"
+  sshPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC5q375F7w6ivGcplwhIDsdWDONhvcIEhcJCpgTN45rZxAUO11ABlMTlVLumaa4Cd4d5ibNUMvUdeKcKPum4SUgo6derY1YvJMj5nlWssxEZrgYGoS7c6FRNVtCqeD/kB520fH9ix86qIRJYkct6eNMreeTwkIJW263xhDidDRvra4lh+yZs9ZV2KHr61if/JO9jEXNsBzsiPxLWbSBmtMHMGZzlmwIZLGOZsK0jHCxe3vcg8CFWTFwNMrNiSbihfa0pbe/YuzIn2mBB+he1L9Ut+P0sBN8UdNPeHzQ1RnSU2F3c7trUaTlb9ipYoB7o2kRLeLsPQQrfMqDS9x+HktT"
   clusters:
   - clusterName: "sm-101-feb14"
     clusterType: "sno"
@@ -34,8 +34,8 @@ spec:
          bootMACAddress: "3C:EC:EF:5E:BC:28"
          bootMode: "UEFI"
          rootDeviceHints:
-           deviceName: "/dev/sda"
-         cpuset: "0-1,38-39"
+           deviceName: "/dev/sda1"
+         cpuset: "0-2,38-39"
          nodeNetwork:
             interfaces:
             - name: eno1
