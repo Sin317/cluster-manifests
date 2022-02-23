@@ -1,0 +1,53 @@
+apiVersion: ran.openshift.io/v1
+kind: SiteConfig
+metadata:
+  name: "fail-dell-72"
+  namespace: "fail-dell-72"
+spec:
+  baseDomain: "vran.ibm.com"
+  pullSecretRef:
+    name: "assisted-deployment-pull-secret"
+  clusterImageSetNameRef: "vran-ocp-v4.9.9-master-sm-101-feb7" 
+  sshPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCyFO/UDjmN4QapVWhCcGRIUVo1L07i7GiEasdvQoHbBytrxjIe7DiAEvrfIqBCJxE8k1VUPc7Z2E2HwQ96gMzbndAhjv2q1tBa2d7uZiPq1dS1llF53p45tt4BEBnaDb9N5QKpJy9dyhpkje6LomEPFLXZaYvgqzw7wHgOPeg3dSJNME5pGw2wglD9WP/rdFfs/yivcwIpK+yR5kLd3R7RvwDh1otZm9gwdZ5WJkeKuuSMVnqUR+vEDJ7ofq3RlB9NQ262SKlBaClq7SQrENZXTANv2K5+7IstBJgTvpmswaAMOMk0bfMTNQvpkrl7La1OXhXUweTtwXj9nM9OxIFb"
+  clusters:
+  - clusterName: "fail-dell-72.vran.ibm.com"
+    clusterType: "sno"
+    clusterProfile: "du"
+    numMasters: 1
+    clusterLabels:
+      common: true
+      sites : "fail-dell-72"
+    clusterNetwork:
+       - cidr: 10.128.0.0/14
+         hostPrefix: 23
+    serviceNetwork:
+       - 172.30.0.0/16
+    additionalNTPSources:
+       - 9.37.131.200
+    machineNetwork:
+       - cidr: 9.37.195.0/24
+    nodes:
+       - hostName: "fail-dell-72.vran.ibm.com"
+         bmcAddress: "idrac-virtualmedia+https://9.37.131.72/redfish/v1/Systems/System.Embedded.1" 
+         bmcCredentialsName:
+           name: "fail-dell-72-fail-dell-72-bmh-secret"
+         bootMACAddress: "78:AC:44:32:7D:D0"
+         bootMode: "UEFI"
+         rootDeviceHints:
+           deviceName: "/dev/sda"
+         cpuset: "0-1,38-39"
+         nodeNetwork:
+            interfaces:
+            - name: eno1
+              macAddress: "78:AC:44:32:7D:D0"
+            config:
+               interfaces:
+               - name: eno1
+                 type: ethernet
+                 state: up
+                 macAddress: "78:AC:44:32:7D:D0"
+                 ipv4:
+                   enabled: true
+                   dhcp: true
+                 ipv6:
+                   enabled: false
