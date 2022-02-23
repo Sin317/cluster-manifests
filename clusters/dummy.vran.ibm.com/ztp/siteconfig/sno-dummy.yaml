@@ -1,0 +1,53 @@
+apiVersion: ran.openshift.io/v1
+kind: SiteConfig
+metadata:
+  name: "dummy"
+  namespace: "dummy"
+spec:
+  baseDomain: "vran.ibm.com"
+  pullSecretRef:
+    name: "assisted-deployment-pull-secret"
+  clusterImageSetNameRef: "vran-ocp-v4.9.9-master-sm-101-feb7" 
+  sshPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDegqtjaenER/97I14ZmdVDGNhQIBTYGL6xZjpQZoLbDK/fw9xQp4asDZHZgN57A8ZyiKaFcc5Ds3TC2R+SZHXM6GYGZ6GKdIEX8zn91gC5PNcmOZia4hDdJAmUwBQeKe+KABJpmNT3M+m8/HZAubDxoo61P/Cw2pWtwP1/t9nYhquOioUeYmNK9iJW9UcMLgiLk9zEGmcCWmD+GiP1eTyuzf3T77FZie1826uO0M7OtY26NAEw1gQdSglmYrgE+5j/Ub5IapPr4AU4VVi0wKQ3lv4jC2f4KDFKTuyw0EJHAEIPXZmdpe1Qw+PP0LKOWjhLgQ8igcfIWMixPaUWpSml"
+  clusters:
+  - clusterName: "dummy"
+    clusterType: "sno"
+    clusterProfile: "du"
+    numMasters: 1
+    clusterLabels:
+      common: true
+      sites : "dummy"
+    clusterNetwork:
+       - cidr: 10.128.0.0/14
+         hostPrefix: 23
+    serviceNetwork:
+       - 172.30.0.0/16
+    additionalNTPSources:
+       - 9.37.131.200
+    machineNetwork:
+       - cidr: 9.37.195.0/24
+    nodes:
+       - hostName: "dummy.vran.ibm.com"
+         bmcAddress: "idrac-virtualmedia+https://9.37.131.72/redfish/v1/Systems/System.Embedded.1" 
+         bmcCredentialsName:
+           name: "dummy-dummy-bmh-secret"
+         bootMACAddress: "78:AC:44:32:7D:D0"
+         bootMode: "UEFI"
+         rootDeviceHints:
+           deviceName: "/dev/sda"
+         cpuset: "0-1,38-39"
+         nodeNetwork:
+            interfaces:
+            - name: eno1
+              macAddress: "78:AC:44:32:7D:D0"
+            config:
+               interfaces:
+               - name: eno1
+                 type: ethernet
+                 state: up
+                 macAddress: "78:AC:44:32:7D:D0"
+                 ipv4:
+                   enabled: true
+                   dhcp: true
+                 ipv6:
+                   enabled: false
