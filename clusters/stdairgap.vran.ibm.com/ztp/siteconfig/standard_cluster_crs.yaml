@@ -1,0 +1,150 @@
+---
+apiVersion: hive.openshift.io/v1
+kind: ClusterDeployment
+metadata:
+  name: stdairgap
+  namespace: stdairgap
+spec:
+  baseDomain: vran.ibm.com
+  clusterInstallRef:
+    group: extensions.hive.openshift.io
+    kind: AgentClusterInstall
+    name: stdairgap
+    version: v1beta1
+  clusterName: stdairgap
+  platform:
+    agentBareMetal:
+      agentSelector:
+        matchLabels:
+          cluster-name: stdairgap
+  pullSecretRef:
+    name: assisted-deployment-pull-secret
+
+---
+apiVersion: extensions.hive.openshift.io/v1beta1
+kind: AgentClusterInstall
+metadata:
+  name: stdairgap
+  namespace: stdairgap
+spec:
+  apiVIP: 9.37.195.19
+  ingressVIP: 9.37.195.18
+  clusterDeploymentRef:
+    name: stdairgap
+  provisionRequirements:
+    controlPlaneAgents: 3
+  imageSetRef:
+    name: "vran-ocp-v4.9.9-master-sm-101-feb7"
+  networking:
+    clusterNetwork:
+    - cidr: 10.128.0.0/14
+      hostPrefix: 23
+    serviceNetwork:
+    - 172.30.0.0/16
+  sshPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDeUZfc/xYcBiLa+sn5FcsmJkWq1UYKVRkA+2iujucOMRKe/iv5sbA1Q8CS+99k0bguM5N9q31kS6BFqSNT6ufrGWGgMpvq2UkkBskAorVyB4XwXArOOPvIZsHTl9BoGUpOGZRttMkRrkqMBefvAlMHvdzZwocZzs/0AC+kJgyShz/WiqrTppaXOVG2Wr0dnsSl4ScX27/4AzMSLvrOLtVOKXEnXzxo4ZkWkXpk7Oh88bYZsj1os7SyDTlqJ8xf87FBIrmXyce1+WKubx7H+gQWG9Zm8/guXYD+pWaUwp/lCCXn3KIP/h03anJcgxpWEXQxIg1yIdYLftseVwSPcWYB"
+
+---
+apiVersion: agent.open-cluster-management.io/v1
+kind: KlusterletAddonConfig
+metadata:
+  name: stdairgap
+  namespace: stdairgap
+spec:
+  clusterName: stdairgap
+  clusterNamespace: stdairgap
+  clusterLabels:
+    cloud: auto-detect
+    vendor: auto-detect
+  applicationManager:
+    enabled: true
+  policyController:
+    enabled: true
+  searchCollector:
+    enabled: true
+  certPolicyController:
+    enabled: true
+  iamPolicyController:
+    enabled: true
+
+---
+apiVersion: agent-install.openshift.io/v1beta1
+kind: InfraEnv
+metadata:
+  name: stdairgap
+  namespace: stdairgap
+spec:
+  additionalNTPSources:
+    - 9.37.131.200
+  clusterRef:
+    name: stdairgap
+    namespace: stdairgap
+  # agentLabelSelector:
+  #   matchLabels:
+  #     cluster-name: stdairgap
+  pullSecretRef:
+    name: assisted-deployment-pull-secret
+  sshAuthorizedKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDeUZfc/xYcBiLa+sn5FcsmJkWq1UYKVRkA+2iujucOMRKe/iv5sbA1Q8CS+99k0bguM5N9q31kS6BFqSNT6ufrGWGgMpvq2UkkBskAorVyB4XwXArOOPvIZsHTl9BoGUpOGZRttMkRrkqMBefvAlMHvdzZwocZzs/0AC+kJgyShz/WiqrTppaXOVG2Wr0dnsSl4ScX27/4AzMSLvrOLtVOKXEnXzxo4ZkWkXpk7Oh88bYZsj1os7SyDTlqJ8xf87FBIrmXyce1+WKubx7H+gQWG9Zm8/guXYD+pWaUwp/lCCXn3KIP/h03anJcgxpWEXQxIg1yIdYLftseVwSPcWYB"
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: "dell-44.vran.ibm.com"
+  namespace: stdairgap
+  annotations:
+    inspect.metal3.io: disabled
+    bmac.agent-install.openshift.io/role: master
+    bmac.agent-install.openshift.io/hostname: "dell-44.vran.ibm.com"
+  labels:
+    infraenvs.agent-install.openshift.io: "stdairgap"
+spec:
+  bootMode: "UEFI"
+  bmc:
+    address: "idrac-virtualmedia+https://9.37.131.44/redfish/v1/Systems/System.Embedded.1" 
+    disableCertificateVerification: true
+    credentialsName: stdairgap-dell-44-bmh-secret
+  bootMACAddress: 78:AC:44:22:9B:74
+  automatedCleaningMode: disabled
+  online: true
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: "dell-72.vran.ibm.com"
+  namespace: stdairgap
+  annotations:
+    inspect.metal3.io: disabled
+    bmac.agent-install.openshift.io/role: master
+    bmac.agent-install.openshift.io/hostname: "dell-72.vran.ibm.com"
+  labels:
+    infraenvs.agent-install.openshift.io: "stdairgap"
+spec:
+  bootMode: "UEFI"
+  bmc:
+    address: "idrac-virtualmedia+https://9.37.131.72/redfish/v1/Systems/System.Embedded.1" 
+    disableCertificateVerification: true
+    credentialsName: stdairgap-dell-72-bmh-secret
+  bootMACAddress: 78:AC:44:32:7D:D0
+  automatedCleaningMode: disabled
+  online: true
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: "dell-73.vran.ibm.com"
+  namespace: stdairgap
+  annotations:
+    inspect.metal3.io: disabled
+    bmac.agent-install.openshift.io/role: master
+    bmac.agent-install.openshift.io/hostname: "dell-73.vran.ibm.com"
+  labels:
+    infraenvs.agent-install.openshift.io: "stdairgap"
+spec:
+  bootMode: "UEFI"
+  bmc:
+    address: "idrac-virtualmedia+https://9.37.131.73/redfish/v1/Systems/System.Embedded.1" 
+    disableCertificateVerification: true
+    credentialsName: stdairgap-dell-73-bmh-secret
+  bootMACAddress: 78:AC:44:32:7A:D0
+  automatedCleaningMode: disabled
+  online: true
+---
