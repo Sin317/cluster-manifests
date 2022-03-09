@@ -8,7 +8,7 @@ spec:
   pullSecretRef:
     name: "assisted-deployment-pull-secret"
   clusterImageSetNameRef: "vran-ocp-v4.9.9-master-sm-101-feb7" 
-  sshPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC3Rei+VJRjKSqq5X0ZXcA7d+G5j5hdr73YeKn6p6FGi7axyktxqYChnM+xVc5p9bNb/pm8tSZU8gBK7kknxaMtnjneVSWb+E6iRThidiHyF7CInhxbhVPOCMtS0dFcIEIBTFICaejgCrMu3uub8Usa4f4+9zJyepaeTmvh+5yZGnmCXIAMLB0ryVR1Cfq2HVtLX06xJyTUEX6BC6+c/ovlNCwNy6xnKdV/j1/2T7HhjiJkOc/r71IHwZRJBR76wW8lAf1kYomndHdpcNJtjjeu/cVLKeBe8bh+msKEXxVC5JfKSt3H5coaagyQzhXN/ubQWWHgd1xnbhFe3ktk8gQz"
+  sshPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC4lEgRJG8LAbMRFQ10CcSb6jtautojSULy7CMhW0H+aGCl+P2rmG6GkWQL4hrqV11J3QPXdkxsDq92JGY0eDN2xzFrNWew+jkKbvMYuPDpPIdhBYojf1/W9kAKVI2N1NWlAfceKc6xO67pq2VR1GKM5IE1YeLWwub7J++b3xyh9Mj5aiBqAzG2h664M2L//q/1aMpjUIx63dHDXKUT3iGsgKWpXm2jkF+fKKTCjLk4c/rBQtFuxdV9skqge6dRdwkJpfRe0M2ca8NtUzcZR7pzTPS2+a3p4XsOWyB7K0fDPfFg9vs1bns2YXorXd+FrSJQ8V3TDAHfJwBauGqph4sx"
   clusters:
   - clusterName: "dell-80"
     clusterType: "sno"
